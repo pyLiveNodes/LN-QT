@@ -20,6 +20,7 @@ test:
   script:
     - tox -e py38
   before_script:
+    - apt-get install python3-pip
     - pip install -r requirements_setup.txt
   artifacts:
     when: always
@@ -39,6 +40,7 @@ pages:
     paths:
       - .tox
   before_script:
+    - apt-get install python3-pip
     - pip install -r requirements_setup.txt
   script:
     - tox -e docs
@@ -54,8 +56,10 @@ pages:
 build-package:
   stage: deploy
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/fadawar/docker-pyqt5
-  script:
+  before_script:
+    - apt-get install python3-pip
     - pip install twine build
+  script:
     - python3 -m build --wheel
     - TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USERNAME} python3 -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
   only:
