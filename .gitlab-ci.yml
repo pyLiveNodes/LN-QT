@@ -16,7 +16,7 @@ format:
 test:
   stage: test
   # TODO: build a custom image for this, needs to include biokit stuff in the future as well...
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/python:3.8
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker-pyqt5
   script:
     - tox -e py38
   before_script:
@@ -33,7 +33,7 @@ test:
 
 pages:
   stage: deploy
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/python:3.9-slim
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker-pyqt5
   cache:
     key: tox-docs
     paths:
@@ -53,7 +53,7 @@ pages:
 
 build-package:
   stage: deploy
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/python:3.8
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker-pyqt5
   script:
     - pip install twine build
     - python3 -m build --wheel
