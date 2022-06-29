@@ -15,8 +15,8 @@ dependencies = [
 ]
 
 [project.entry-points."livenodes.nodes"]
-annotate_ui_button = "livenodes_matplotlib.annotate_ui_button:Annotate_ui_button"
-print_data = "livenodes_matplotlib.print_data:Print_data"
+annotate_ui_button = "livenodes_qt.annotate_ui_button:Annotate_ui_button"
+print_data = "livenodes_qt.print_data:Print_data"
 
 
 [project.optional-dependencies]

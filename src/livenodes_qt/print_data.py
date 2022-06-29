@@ -2,7 +2,7 @@ from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QFormLayout, QLabel
 
 
-class Print_Data(View_QT):
+class Print_data(View_QT):
     channels_in = ['Data']
     channels_out = []
 
