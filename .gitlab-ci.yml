@@ -20,7 +20,6 @@ test:
   script:
     - tox -e py38
   before_script:
-    - apt-get install python3-pip -y
     - pip install -r requirements_setup.txt
   artifacts:
     when: always
@@ -40,7 +39,6 @@ pages:
     paths:
       - .tox
   before_script:
-    - apt-get install python3-pip -y
     - pip install -r requirements_setup.txt
   script:
     - tox -e docs
@@ -57,7 +55,6 @@ build-package:
   stage: deploy
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:20.04
   before_script:
-    - apt-get install python3-pip -y
     - pip install twine build
   script:
     - python3 -m build --wheel
