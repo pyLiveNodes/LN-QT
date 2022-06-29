@@ -16,7 +16,7 @@ format:
 test:
   stage: test
   # TODO: build a custom image for this, needs to include biokit stuff in the future as well...
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/fadawar/docker-pyqt5
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:20.04
   script:
     - tox -e py38
   before_script:
@@ -34,7 +34,7 @@ test:
 
 pages:
   stage: deploy
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/fadawar/docker-pyqt5
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:20.04
   cache:
     key: tox-docs
     paths:
@@ -55,7 +55,7 @@ pages:
 
 build-package:
   stage: deploy
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/fadawar/docker-pyqt5
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:20.04
   before_script:
     - apt-get install python3-pip -y
     - pip install twine build
