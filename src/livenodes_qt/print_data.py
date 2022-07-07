@@ -1,10 +1,37 @@
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QFormLayout, QLabel
 
+from livenodes.port import Port
+from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_Vector_of_Strings
+from typing import NamedTuple
+
+class Port_stringable(Port):
+
+    example_values = [
+        ["EMG1", "EMG2"],
+        [0, 1],
+        [20, .1],
+        20,
+        "Bla"
+    ]
+
+    def __init__(self, name='stringable', optional=False):
+        super().__init__(name, optional)
+
+    @staticmethod
+    def check_value(value):
+        try: 
+            str(value)
+            return True, None
+        except Exception as err:
+            return False, err
+
+class Ports_any(NamedTuple):
+    any: Port_stringable = Port_stringable("Any")
 
 class Print_data(View_QT):
-    channels_in = ['Data']
-    channels_out = []
+    channels_in = Ports_any()
+    channels_out = Ports_empty()
 
     category = "Debug"
     description = ""
