@@ -30,8 +30,8 @@ class Ports_any(NamedTuple):
     any: Port_stringable = Port_stringable("Any")
 
 class Print_data(View_QT):
-    channels_in = Ports_any()
-    channels_out = Ports_empty()
+    ports_in = Ports_any()
+    ports_out = Ports_empty()
 
     category = "Debug"
     description = ""

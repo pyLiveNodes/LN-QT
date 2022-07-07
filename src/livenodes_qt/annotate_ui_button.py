@@ -11,8 +11,8 @@ class Ports_out(NamedTuple):
     annotation: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
 
 class Annotate_ui_button(View_QT):
-    channels_in = Ports_data()
-    channels_out = Ports_out()
+    ports_in = Ports_data()
+    ports_out = Ports_out()
 
     category = "Annotation"
     description = ""
