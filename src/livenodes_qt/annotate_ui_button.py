@@ -8,7 +8,7 @@ from typing import NamedTuple
 
 class Ports_out(NamedTuple):
     data: Port_Data = Port_Data("Data")
-    annotation: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
+    annot: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
 
 class Annotate_ui_button(View_QT):
     ports_in = Ports_data()
