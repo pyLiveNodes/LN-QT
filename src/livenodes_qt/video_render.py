@@ -11,19 +11,13 @@ from PyQt5 import QtCore
 
 from livenodes.sender import Sender
 from livenodes.viewer import View_QT
-#TODO Change this import if livenodes_core_nodes is the correct location for this node
-# from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_Vector_of_Strings
+
+from livenodes_core_nodes.ports import Ports_data_channels, Ports_empty
 
 
-#TODO Integrate Ports later on
-# class Ports_out(NamedTuple):
-#     data: Port_Data = Port_Data("Data")
-#     annot: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
-
-
-class RenderVideo(View_QT):
-    channels_in =  ["Data"] # Ports_empty()
-    channels_out = ["Annotation"] # Ports_out()
+class Video_Render(View_QT):
+    ports_in =  Ports_data_channels()
+    ports_out = Ports_empty()
 
     category = "Annotation"
     description = ""

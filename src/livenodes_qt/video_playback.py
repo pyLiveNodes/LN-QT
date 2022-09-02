@@ -11,19 +11,19 @@ from PyQt5 import QtCore
 
 from livenodes.sender import Sender
 from livenodes.viewer import View_QT
-#TODO Change this import if livenodes_core_nodes is the correct location for this node
-# from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_Vector_of_Strings
+# TODO Change this import if livenodes_core_nodes is the correct location for this node
+from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_Vector_of_Strings
 
+from livenodes_core_nodes.ports import Port_Dict, Port_Vector_of_Ints, Port_Data, Port_Single_Channel_Number, Port_Vector_of_Strings, Ports_empty
 
-#TODO Integrate Ports later on
-# class Ports_out(NamedTuple):
-#     data: Port_Data = Port_Data("Data")
-#     annot: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
+class Ports_out(NamedTuple):
+    annot: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
+    data: Port_Data = Port_Data('Data')
 
 
 class Video_Playback(Sender, View_QT):
-    channels_in =  [] # Ports_empty()
-    channels_out = ["Annotation"] # Ports_out()
+    ports_in = Ports_empty()
+    ports_out = Ports_out()
 
     category = "Annotation"
     description = ""
@@ -91,7 +91,8 @@ class Video_Playback(Sender, View_QT):
             if not frame_available:
                 continue
 
-            self._emit_data(playback_annotation, channel=self.channels_out[0])
+            self._emit_data(playback_annotation, channel=self.ports_out.annot)
+            self._emit_data(playback_frame, channel=self.ports_out.data)
             self._emit_draw(data=[playback_frame])
                 
             yield True

@@ -18,6 +18,8 @@ dependencies = [
 [project.entry-points."livenodes.nodes"]
 annotate_ui_button = "livenodes_qt.annotate_ui_button:Annotate_ui_button"
 print_data = "livenodes_qt.print_data:Print_data"
+video_playback = "livenodes_qt.video_playback:Video_Playback"
+video_render = "livenodes_qt.video_render:Video_Render"
 
 
 [project.optional-dependencies]
