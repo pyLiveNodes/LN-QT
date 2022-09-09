@@ -1,7 +1,7 @@
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QFormLayout, QLabel
 
-from livenodes.port import Port
+from livenodes.components.port import Port
 from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_Vector_of_Strings
 from typing import NamedTuple
 
