@@ -53,8 +53,9 @@ class Annotate_ui_button(View_QT):
         while not self.target_q.empty():
             self.fall_back_target, self.current_target = self.target_q.get()
 
-        self._emit_data([self.current_target] * len(data),
-                        channel="Annotation")
+        # implicit batch concat again...
+        self._emit_data([self.current_target] * data.shape[1] * data.shape[0],
+                        channel=self.ports_out.annot)
 
     def __activity_toggle_rec(self):
         if self.recording:
