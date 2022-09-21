@@ -22,13 +22,12 @@ class Video_Render(View_QT):
     category = "Annotation"
     description = ""
 
-    #TODO Change paths when the actual repo etc. is known
     example_init = {
-        "name": "Video Playback",
+        "name": "Video Render",
     }
 
     def __init__(self,
-                name="Video Playback",
+                name="Video Render",
                  **kwargs):
         super().__init__(name=name, **kwargs)
         self.name = name
@@ -44,8 +43,8 @@ class Video_Render(View_QT):
         }
     
     
-    #TODO Scale according to windowsize? For now the video is centered
-    def convert_cv_to_qt(self, cv_img):  # img_height, img_width
+
+    def convert_cv_to_qt(self, cv_img):
         """
         Convert from an opencv image to QPixmap.
         Code source: https://github.com/docPhil99/opencvQtdemo/blob/master/staticLabel2.py
@@ -54,7 +53,7 @@ class Video_Render(View_QT):
         height, width, channels = rgb_image.shape
         bytes_per_line = channels * width
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, width, height, bytes_per_line, QtGui.QImage.Format_RGB888)
-        # p = convert_to_Qt_format.scaled(img_width, img_height, Qt.KeepAspectRatio)
+
         return QPixmap.fromImage(convert_to_Qt_format)
 
     def process(self, data, **kwargs):
