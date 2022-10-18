@@ -48,14 +48,12 @@ class Annotate_ui_button(View_QT):
 
     def process(self, data, **kwargs):
         # IMPORTANT: we assume that the length of data is always short enough that we do not care about timing issues with the label
-        self._emit_data(data)
 
         while not self.target_q.empty():
             self.fall_back_target, self.current_target = self.target_q.get()
 
         # implicit batch concat again...
-        self._emit_data([self.current_target] * data.shape[1] * data.shape[0],
-                        channel=self.ports_out.annot)
+        return self.ret(data=data, annot=[self.current_target] * len(data))
 
     def __activity_toggle_rec(self):
         if self.recording:
