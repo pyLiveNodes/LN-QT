@@ -3,12 +3,12 @@ import multiprocessing as mp
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QLineEdit, QVBoxLayout, QFormLayout, QHBoxLayout, QLabel, QPushButton, QSizePolicy
 
-from livenodes_core_nodes.ports import Ports_data, Port_Data, Port_Vector_of_Strings
+from livenodes_core_nodes.ports import Ports_data, Port_Data, Port_List_Str
 from typing import NamedTuple
 
 class Ports_out(NamedTuple):
     data: Port_Data = Port_Data("Data")
-    annot: Port_Vector_of_Strings = Port_Vector_of_Strings("Annotation")
+    annot: Port_List_Str = Port_List_Str("Annotation")
 
 class Annotate_ui_button(View_QT):
     ports_in = Ports_data()
