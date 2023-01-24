@@ -2,7 +2,7 @@ from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QFormLayout, QLabel
 
 from livenodes.components.port import Port
-from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_List_Str
+from livenodes_core_nodes.ports import Ports_empty
 from typing import NamedTuple
 
 class Port_stringable(Port):
