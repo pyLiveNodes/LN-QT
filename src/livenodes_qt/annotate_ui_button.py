@@ -1,14 +1,17 @@
 import multiprocessing as mp
+import numpy as np
 
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QLineEdit, QVBoxLayout, QFormLayout, QHBoxLayout, QLabel, QPushButton, QSizePolicy
 
-from livenodes_core_nodes.ports import Ports_data, Port_Data, Port_List_Str
+from livenodes_core_nodes.ports import Ports_data, Port_Data, Port_TS_Str
 from typing import NamedTuple
 
 class Ports_out(NamedTuple):
+    # TODO: it doesn't make much sense to have this return batched data, instead these should be simple lists, which can be stacked back together if needed?
+    # TODO: maybe re-consider the online v offline approaches? ie offline needs batches for performance, online doesn't know what a batch is...
     data: Port_Data = Port_Data("Data")
-    annot: Port_List_Str = Port_List_Str("Annotation")
+    annot: Port_TS_Str = Port_TS_Str("Annotation")
 
 class Annotate_ui_button(View_QT):
     ports_in = Ports_data()
@@ -53,7 +56,8 @@ class Annotate_ui_button(View_QT):
             self.fall_back_target, self.current_target = self.target_q.get()
 
         # implicit batch concat again...
-        return self.ret(data=data, annot=[self.current_target] * len(data))
+        d = np.array(data)
+        return self.ret(data=data, annot=np.repeat(self.current_target, d.size).reshape(d.shape))
 
     def __activity_toggle_rec(self):
         if self.recording:
