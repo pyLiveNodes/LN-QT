@@ -1,4 +1,4 @@
-# Livenodes
+# LN QT
 
 ```{eval-rst}
 .. toctree::
