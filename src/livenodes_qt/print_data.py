@@ -1,8 +1,8 @@
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QFormLayout, QLabel
 
-from livenodes.port import Port
-from livenodes_core_nodes.ports import Ports_empty, Port_Data, Port_Vector_of_Strings
+from livenodes.components.port import Port
+from livenodes_core_nodes.ports import Ports_empty
 from typing import NamedTuple
 
 class Port_stringable(Port):
@@ -18,20 +18,20 @@ class Port_stringable(Port):
     def __init__(self, name='stringable', optional=False):
         super().__init__(name, optional)
 
-    @staticmethod
-    def check_value(value):
+    @classmethod
+    def check_value(cls, value):
         try: 
             str(value)
             return True, None
         except Exception as err:
             return False, err
 
-class Ports_any(NamedTuple):
-    any: Port_stringable = Port_stringable("Any")
+class Ports_stringable(NamedTuple):
+    text: Port_stringable = Port_stringable("Text")
 
 class Print_data(View_QT):
-    channels_in = Ports_any()
-    channels_out = Ports_empty()
+    ports_in = Ports_stringable()
+    ports_out = Ports_empty()
 
     category = "Debug"
     description = ""
@@ -41,8 +41,8 @@ class Print_data(View_QT):
     }
 
 
-    def process(self, data, **kwargs):
-        self._emit_draw(data=data)
+    def process(self, text, **kwargs):
+        self._emit_draw(text=text)
 
     def _init_draw(self, parent):
 
@@ -52,7 +52,7 @@ class Print_data(View_QT):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addRow(label)
 
-        def update(data=None):
+        def update(text=None):
             nonlocal label
-            label.setText(str(data))
+            label.setText(str(text))
         return update
