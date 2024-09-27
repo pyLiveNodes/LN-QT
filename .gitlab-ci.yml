@@ -42,13 +42,14 @@ pages:
   stage: deploy
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:20.04
   cache:
-    key: tox-test
+    key: tox-docs
     paths:
       - .tox
   variables:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
     - apt-get update && apt-get install git python3 python3-pip python3.8-venv python3-opencv --no-install-recommends -y
+    - pip install -r requirements_setup.txt
   script:
     - tox -e docs
   after_script:
