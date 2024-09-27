@@ -19,14 +19,14 @@ test:
     key: tox-test
     paths:
       - .tox
-  script:
-    - tox -e py312
   variables:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
     - apt-get update && apt-get install git python3 python3-pip python3.8-venv python3-opencv --no-install-recommends -y
     - pip install -U pip wheel setuptools cython
     - pip install -r requirements_setup.txt
+  script:
+    - tox -e py312
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
   artifacts:
@@ -40,13 +40,15 @@ test:
 
 pages:
   stage: deploy
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/python:3.12-slim
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/ubuntu:20.04
   cache:
-    key: tox-docs
+    key: tox-test
     paths:
       - .tox
+  variables:
+    DEBIAN_FRONTEND: 'noninteractive'
   before_script:
-    - pip install -r requirements_setup.txt
+    - apt-get update && apt-get install git python3 python3-pip python3.8-venv python3-opencv --no-install-recommends -y
   script:
     - tox -e docs
   after_script:
