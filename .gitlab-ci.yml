@@ -23,7 +23,7 @@ test:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
     - apt-get update && apt-get install git python3 python3-pip python3-opencv --no-install-recommends -y
-    - pip install --user tox --break-system-packages
+    - pip install tox --break-system-packages
   script:
     - tox -e py312
   rules:
@@ -48,7 +48,7 @@ pages:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
     - apt-get update && apt-get install git python3 python3-pip python3-opencv --no-install-recommends -y
-    - pip install --user tox --break-system-packages
+    - pip install tox --break-system-packages
   script:
     - tox -e docs
   after_script:
