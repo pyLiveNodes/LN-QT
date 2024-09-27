@@ -22,9 +22,9 @@ test:
   variables:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
-    # - apt-get update && apt-get install git python3 python3-pip python3.12-venv python3-opencv --no-install-recommends -y
-    - pip install -U pip wheel setuptools cython
-    - pip install -r requirements_setup.txt
+    - apt-get update && apt-get install git python3 python3-pip python3-venv python3-opencv --no-install-recommends -y
+    - pip install -U pip wheel setuptools cython --break-system-packages
+    - pip install -r requirements_setup.txt --break-system-packages
   script:
     - tox -e py312
   rules:
@@ -48,8 +48,8 @@ pages:
   variables:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
-    # - apt-get update && apt-get install git python3 python3-pip python3.12-venv python3-opencv --no-install-recommends -y
-    - pip install -r requirements_setup.txt
+    - apt-get update && apt-get install git python3 python3-pip python3-venv python3-opencv --no-install-recommends -y
+    - pip install -r requirements_setup.txt --break-system-packages
   script:
     - tox -e docs
   after_script:
@@ -67,8 +67,8 @@ build-package:
   variables:
     DEBIAN_FRONTEND: 'noninteractive'
   before_script:
-    # - apt-get update && apt-get install git python3 python3-pip python3.12-venv python3-opencv --no-install-recommends -y
-    - pip install twine build
+    - apt-get update && apt-get install git python3 python3-pip python3-venv python3-opencv --no-install-recommends -y
+    - pip install twine build --break-system-packages
   script:
     - python3 -m build --wheel
     - TWINE_PASSWORD=${TWINE_PASSWORD} TWINE_USERNAME=${TWINE_USERNAME} python3 -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
