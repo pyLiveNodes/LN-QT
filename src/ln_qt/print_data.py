@@ -1,9 +1,8 @@
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QFormLayout, QLabel
 
-from livenodes.components.port import Port
-from livenodes_core_nodes.ports import Ports_empty
-from typing import NamedTuple
+from ln_ports import Ports_empty
+from livenodes import Ports_collection, Port
 
 class Port_stringable(Port):
 
@@ -15,8 +14,8 @@ class Port_stringable(Port):
         "Bla"
     ]
 
-    def __init__(self, name='stringable', optional=False):
-        super().__init__(name, optional)
+    def __init__(self, name='stringable', *args, **kwargs):
+        super().__init__(name, *args, **kwargs)
 
     @classmethod
     def check_value(cls, value):
@@ -26,7 +25,7 @@ class Port_stringable(Port):
         except Exception as err:
             return False, err
 
-class Ports_stringable(NamedTuple):
+class Ports_stringable(Ports_collection):
     text: Port_stringable = Port_stringable("Text")
 
 class Print_data(View_QT):

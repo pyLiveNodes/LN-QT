@@ -1,7 +1,7 @@
-livenodes_qt
+ln_qt
 ============
 
 .. toctree::
    :maxdepth: 4
 
-   livenodes_qt
+   ln_qt
