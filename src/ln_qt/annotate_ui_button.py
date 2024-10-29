@@ -2,23 +2,24 @@ import multiprocessing as mp
 import numpy as np
 
 from livenodes.viewer import View_QT
-from PyQt5.QtWidgets import QLineEdit, QVBoxLayout, QFormLayout, QHBoxLayout, QLabel, QPushButton, QSizePolicy
+from PyQt5.QtWidgets import QLineEdit, QFormLayout, QLabel, QPushButton, QSizePolicy
 
-from livenodes_core_nodes.ports import Ports_data, Port_Data, Port_List_Str
-from typing import NamedTuple
+from ln_ports import Ports_ts, Port_Timeseries, Port_List_Str
+from livenodes import Ports_collection
 
-class Ports_out(NamedTuple):
+class Ports_out(Ports_collection):
     # TODO: it doesn't make much sense to have this return batched data, instead these should be simple lists, which can be stacked back together if needed?
     # TODO: maybe re-consider the online v offline approaches? ie offline needs batches for performance, online doesn't know what a batch is...
-    data: Port_Data = Port_Data("Data")
+    data: Port_Timeseries = Port_Timeseries("Data")
     annot: Port_List_Str = Port_List_Str("Annotation")
 
 class Annotate_ui_button(View_QT):
     """
     Annotate a signal Stream Live via GUI Buttons.
-    Important: never use with batches. The node assumes a live signal without batches.
+    IMPORTANT: never use with batches. The node assumes a live signal without batches.
+    IMPORTANT: we assume that the length of data is always short enough that we do not care about timing issues with the label
     """
-    ports_in = Ports_data()
+    ports_in = Ports_ts()
     ports_out = Ports_out()
 
     category = "Annotation"
@@ -53,12 +54,11 @@ class Annotate_ui_button(View_QT):
             "fall_back_target": self.fall_back_target
         }
 
-    def process(self, data, **kwargs):
-        # IMPORTANT: we assume that the length of data is always short enough that we do not care about timing issues with the label
+    def process(self, ts, **kwargs):
         while not self.target_q.empty():
             self.fall_back_target, self.current_target = self.target_q.get()
 
-        return self.ret(data=data, annot=np.repeat(self.current_target, np.array(data).shape[1]))
+        return self.ret(data=ts, annot=np.repeat(self.current_target, np.array(ts).shape[0]))
 
     def __activity_toggle_rec(self):
         if self.recording:
