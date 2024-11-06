@@ -1,3 +1,6 @@
+[![Format and Test](https://github.com/pyLiveNodes/LN-QT/actions/workflows/format_test.yml/badge.svg)](https://github.com/pyLiveNodes/LN-QT/actions/workflows/format_test.yml)
+[![Publish](https://github.com/pyLiveNodes/LN-QT/actions/workflows/publish.yml/badge.svg)](https://github.com/pyLiveNodes/LN-QT/actions/workflows/publish.yml)
+
 # LN QT
 
 The Livenodes QT package provides interaction and visualization nodes. Most notably online annotation and display of any channels data.
