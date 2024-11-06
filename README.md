@@ -12,11 +12,11 @@ Yale
 
 ## Installation
 
-`pip install livenodes_qt --extra-index-url https://package_puller:8qYs4hBAsmAHJ5AdS_y9@gitlab.csl.uni-bremen.de/api/v4/groups/368/-/packages/pypi/simple`
+`pip install ln_qt --extra-index-url https://package_puller:8qYs4hBAsmAHJ5AdS_y9@gitlab.csl.uni-bremen.de/api/v4/groups/368/-/packages/pypi/simple`
 
 ## Docs
 
-You can find the docs [here](https://livenodes.pages.csl.uni-bremen.de/packages/livenodes_qt/readme.html).
+You can find the docs [here](https://livenodes.pages.csl.uni-bremen.de/packages/ln_qt/readme.html).
 
 ## Restrictions
 

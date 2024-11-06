@@ -1,5 +1,5 @@
 [project]
-name = "Livenodes-Qt"
+name = "LN-Qt"
 dynamic = ['version']
 description = "LiveNodes: node based live streaming sensor/data and visualization suite."
 authors = [
@@ -9,20 +9,16 @@ authors = [
 # pip install . --extra-index-url https://package_puller:8qYs4hBAsmAHJ5AdS_y9@gitlab.csl.uni-bremen.de/api/v4/groups/368/-/packages/pypi/simple
 # pip install -e . --extra-index-url https://package_puller:8qYs4hBAsmAHJ5AdS_y9@gitlab.csl.uni-bremen.de/api/v4/groups/368/-/packages/pypi/simple
 dependencies = [
-    "livenodes>=0.9.1",
-    "livenodes-core-nodes>=0.9.1",
+    "livenodes>=0.12.1b1",
+    "ln_ports>=0.12.1b1",
     "numpy>=1.22.1",
-    "PyQt5>=5.12.3",
-
-    "setuptools>=60.0.0, <67"
+    "PyQt5>=5.12.3"
 ]
-# setuptools version is specified due to a problem in livenodes (presumably phx-class-registry), which causes an deprectation error
-# Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
-# FIX upstream and remove here
 
 [project.entry-points."livenodes.nodes"]
-annotate_ui_button = "livenodes_qt.annotate_ui_button:Annotate_ui_button"
-print_data = "livenodes_qt.print_data:Print_data"
+annotate_ui_button = "ln_qt.annotate_ui_button:Annotate_ui_button"
+print_data = "ln_qt.print_data:Print_data"
+print_shape = "ln_qt.print_shape:Print_shape"
 
 
 [project.optional-dependencies]
@@ -33,9 +29,9 @@ dev = [
 
 [build-system]
 requires = [
-    "setuptools>=48",
+    "setuptools>=60",
     "wheel",
-    "setuptools_scm >= 2.0.0, <3",
+    "setuptools_scm>=3.0.0",
     "setuptools-git-versioning"
 ]
 build-backend = 'setuptools.build_meta'
@@ -44,6 +40,6 @@ build-backend = 'setuptools.build_meta'
 enabled = true
 
 [tool.black]
-line-length = 140
-target-version = ['py36']
+line-length = 180
+target-version = ['py311']
 skip-string-normalization = true
