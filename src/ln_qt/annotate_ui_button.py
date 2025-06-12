@@ -4,13 +4,13 @@ import numpy as np
 from livenodes.viewer import View_QT
 from PyQt5.QtWidgets import QLineEdit, QFormLayout, QLabel, QPushButton, QSizePolicy
 
-from ln_ports import Ports_ts, Port_Timeseries, Port_List_Str
+from ln_ports import Ports_ts, Port_2D_Number, Port_List_Str
 from livenodes import Ports_collection
 
 class Ports_out(Ports_collection):
     # TODO: it doesn't make much sense to have this return batched data, instead these should be simple lists, which can be stacked back together if needed?
     # TODO: maybe re-consider the online v offline approaches? ie offline needs batches for performance, online doesn't know what a batch is...
-    data: Port_Timeseries = Port_Timeseries("Data")
+    data: Port_2D_Number = Port_2D_Number("Data")
     annot: Port_List_Str = Port_List_Str("Annotation")
 
 class Annotate_ui_button(View_QT):
